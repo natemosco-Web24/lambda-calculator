@@ -1,13 +1,32 @@
+*{
+    box-sizing: border-box;
+}
+* button{
+    font-size: 3rem;
+    background-color:rgb(126, 126, 138);
+    border-color: rgb(126, 126, 138);
+}
+.logo-container{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
 .container {
-    background-color: #c00025;
+    background-color: #badfff;
     width: 100%;
     max-width: 550px;
     border-radius: 15px;
     border: 2px solid grey;
     padding-bottom: 25px;
+    margin-left:300px;
+    margin-top:100px;
+    box-shadow: -4px -2px 12px 3px #00000059;
 }
+
+
 .display {
     margin-top: 25px;
+    margin-left: 25px;
     height: 100px;
     width: 450px;
     border-radius: 50px;
@@ -20,3 +39,60 @@
     padding-right: 8%;
     font-size: 5.0rem;
   }
+.App{
+    display:flex;
+    width:100%;
+    min-height:60vh;
+    height:auto;
+}
+.left{
+    width:75%;
+    height:auto;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    button{
+        border-radius: 45px;
+        height:96px;
+        width:96px;
+        button.0{
+            width:150px;
+        }
+    }
+    .specials-container{
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+        padding: 0 30px;
+       align-items: flex-end;
+    }
+    .numbers-container{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+       
+    }
+}
+
+.right{
+    padding-top:50px;
+    width:25%;
+    height:auto;
+    min-height: 60vh;
+    display:flex;
+    flex-direction: column;
+    button{
+        border-radius: 45px;
+        height:96px;
+        width:96px;
+    }
+    .operators-container{
+        height:100%;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+}

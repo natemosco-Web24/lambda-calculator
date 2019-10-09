@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import Numbers from "./components/ButtonComponents/NumberButtons/Numbers";
 import Specials from "./components/ButtonComponents/SpecialButtons/Specials";
@@ -16,15 +16,88 @@ function App() {
   // Your functions should accept a parameter of the the item data being displayed to the DOM (ie - should recieve 5 if the user clicks on
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
+  const [display, setDisplay] = useState([])
 
+  function percentage(num) {
+    return num / 100
+  };
+  function negative(num) {
+    return num * -1
+  };
+  function sum(num1, num2) {
+    return num1 + num2
+  };
+  function divide(num1, num2) {
+    return num1 / num2
+  };
+  function multiply(num1, num2) {
+    return num1 * num2
+  };
+  function sub(num1, num2) {
+    return num1 - num2
+  };
+
+  function doMath(string) {
+    setDisplay([...display, string])
+    for (let i = 0; i < display.length; i++) {
+      if (display[i] === "C") {
+        setDisplay([]);
+      }
+      else if (display[i] === "+/-") {
+        display.pop();
+        let negNum = negative(Number(display.join("")));
+        setDisplay([`${negNum}`]);
+      }
+      else if (display[i] === "%") {
+        display.pop();
+        let decimal = percentage(Number(display.join("")));
+        setDisplay([`${decimal}`]);
+      }
+      else if (display[i] === "=") {
+        display.pop();
+        for (let j = 0; j < display.length; j++) {
+          if (display[j] === "-") {
+            let num1 = Number(display.slice(0, [j]));
+            let num2 = Number(display.slice([j + 1], display.length));
+            let decimal = sub(num1, num2);
+            setDisplay([`${decimal}`]);
+          }
+          else if (display[j] === "+") {
+            let num1 = Number(display.slice(0, [j]));
+            let num2 = Number(display.slice([j + 1], display.length));
+            let decimal = sum(num1, num2);
+            setDisplay([`${decimal}`]);
+          }
+          else if (display[j] === "/") {
+            let num1 = Number(display.slice(0, [j]));
+            let num2 = Number(display.slice([j + 1], display.length));
+            let decimal = divide(num1, num2);
+            setDisplay([`${decimal}`]);
+          }
+          else if (display[j] === "*") {
+            let num1 = Number(display.slice(0, [j]));
+            let num2 = Number(display.slice([j + 1], display.length));
+            let decimal = multiply(num1, num2);
+            setDisplay([`${decimal}`]);
+          }
+        }
+
+      }
+
+    }
+  }
   return (
     <div className="container">
       <Logo />
-      <Display></Display>
+      <Display display={display}></Display>
       <div className="App">
-        <Numbers></Numbers>
-        <Specials></Specials>
-        <Operators></Operators>
+        <section className="left">
+          <Specials doMath={doMath}></Specials>
+          <Numbers doMath={doMath}></Numbers>
+        </section>
+        <section className="right">
+          <Operators doMath={doMath}></Operators>
+        </section>
         {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
       </div>
     </div>
